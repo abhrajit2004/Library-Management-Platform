@@ -66,7 +66,7 @@ router.post('/login', async (req, res) => {
     const authToken = jwt.sign(data, JWT_SECRET);
 
 
-    res.json({ success: true, authToken, message: "User logged in successfully" });
+    res.json({ success: true, authToken, message: "User logged in successfully", user });
 
 })
 
