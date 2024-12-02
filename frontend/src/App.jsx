@@ -8,30 +8,19 @@ import { useEffect, useState } from 'react'
 
 function App() {
 
-  const [isloggedin, setIsloggedin] = useState(false);
-
-  useEffect(()=>{
-    const token = localStorage.getItem('auth-token');
-    if(token){
-      setIsloggedin(true);
-    }
-    else{
-      setIsloggedin(false);
-    }
-  })
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <><Navbar isloggedin={isloggedin} /><Home /></>
+      element: <><Navbar /><Home /></>
     },
     {
       path: "/dashboard",
-      element: <><Navbar  isloggedin={isloggedin} /><Dashboard /></>
+      element: <><Navbar /><Dashboard /></>
     },
     {
       path: "/login",
-      element: <><Navbar /><Login isloggedin={isloggedin} /></>
+      element: <><Navbar /><Login /></>
     }
   ]
   )

@@ -22,6 +22,10 @@ const BooksSchema = new Schema({
         type: String,
         required: true
     },
+    bookimage: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now

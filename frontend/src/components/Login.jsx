@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 
-const Login = ({ isloggedin }) => {
+const Login = () => {
 
     const [role, setRole] = useState('Choose Role');
 

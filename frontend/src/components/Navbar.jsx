@@ -3,24 +3,11 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-const Navbar = ({ isloggedin }) => {
+const Navbar = () => {
 
-    const ref = useRef();
     const navigate = useNavigate();
     const logoutref = useRef();
 
-
-    const handleClick = () => {
-        ref.current.innerHTML = '<span class="loader"></span>';
-
-        setTimeout(() => {
-            navigate('/login');
-        }, 1000);
-
-        setTimeout(() => {
-            ref.current.innerHTML = 'Login / Signup';
-        }, 1000);
-    }
 
     const handleLogOut = () => {
         logoutref.current.innerHTML = '<span class="loader"></span>';
@@ -31,16 +18,6 @@ const Navbar = ({ isloggedin }) => {
             navigate('/login');
         }, 1000);
     }
-
-    useEffect(() => {
-        const token = localStorage.getItem('auth-token');
-        if (token) {
-            navigate('/');
-        }
-        else {
-            navigate('/login');
-        }
-    }, [])
 
     return (
         <nav className='flex justify-between items-center'>
@@ -55,7 +32,7 @@ const Navbar = ({ isloggedin }) => {
                 <Link to={"/"} className='cursor-pointer transition-all text-lg font-medium'>About</Link>
                 <Link to={"/"} className='cursor-pointer transition-all text-lg font-medium'>Contact</Link>
                 <li>
-                    {!isloggedin ? <button ref={ref} onClick={handleClick} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg text-center px-4 py-2">Login / Signup</button> :
+                    { !localStorage.getItem('auth-token') ? <button  type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg text-center px-4 py-2">Login / Signup</button> :
                         <button onClick={handleLogOut} ref={logoutref} type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg text-center px-4 py-2">Log Out</button>}
                 </li>
             </ul>

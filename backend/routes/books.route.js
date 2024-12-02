@@ -29,6 +29,7 @@ router.put('/updatebook/:id', async (req, res) => {
     if(req.body.bookauthor) newBook.bookauthor = req.body.bookauthor;
     if(req.body.bookprice) newBook.bookprice = req.body.bookprice;
     if(req.body.bookgenre) newBook.bookgenre = req.body.bookgenre;
+    if(req.body.bookimage) newBook.bookimage = req.body.bookimage;
 
     let book = await Book.findById(req.params.id);
 
