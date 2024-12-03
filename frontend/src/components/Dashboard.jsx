@@ -243,17 +243,17 @@ const Dashboard = () => {
         pauseOnHover
         theme="dark"
       />
-      <div className='min-h-[91vh] bg-slate-300 text-lg font-medium'>
+      <div className='md:min-h-[91vh] min-h-screen bg-slate-300 text-lg font-medium'>
         {localStorage.getItem('role') === 'admin' ?
           <section className='flex flex-col gap-4 justify-center items-center'>
             <h1 className='text-5xl font-medium mt-5 text-center'>Dashboard</h1>
             <p className='text-center font-medium text-lg'>Welcome to the dashboard. Here you can add, update, delete books and manage users.</p>
             <form onSubmit={handleAddBook} className='flex flex-col justify-center items-center gap-4'>
-              <input onChange={(e) => setBookname(e.target.value)} value={bookname} className='px-4 py-2 w-[30vw] rounded-md' id='bookname' name='bookname' type="text" placeholder='Book Name' required />
-              <input onChange={(e) => setBookAuthor(e.target.value)} value={bookauthor} className='px-4 py-2 w-[30vw] rounded-md' id='bookauthor' name='bookauthor' type="text" placeholder='Author Name' required />
-              <input onChange={(e) => setBookgenre(e.target.value)} value={bookgenre} className='px-4 py-2 w-[30vw] rounded-md' id='genre' name='genre' type="text" placeholder='Genre' required />
-              <input onChange={(e) => setBookimage(e.target.value)} value={bookimage} className='px-4 py-2 w-[30vw] rounded-md' id='bookimage' name='bookimage' type="text" placeholder='Book Image' required />
-              <input onChange={(e) => setBookprice(e.target.value)} value={bookprice} className='px-4 py-2 w-[30vw] rounded-md' id='price' name='price' type="number" placeholder='Price' required />
+              <input onChange={(e) => setBookname(e.target.value)} value={bookname} className='px-4 py-2 w-[80vw] md:w-[30vw] rounded-md' id='bookname' name='bookname' type="text" placeholder='Book Name' required />
+              <input onChange={(e) => setBookAuthor(e.target.value)} value={bookauthor} className='px-4 py-2 w-[80vw] md:w-[30vw] rounded-md' id='bookauthor' name='bookauthor' type="text" placeholder='Author Name' required />
+              <input onChange={(e) => setBookgenre(e.target.value)} value={bookgenre} className='px-4 py-2 w-[80vw] md:w-[30vw] rounded-md' id='genre' name='genre' type="text" placeholder='Genre' required />
+              <input onChange={(e) => setBookimage(e.target.value)} value={bookimage} className='px-4 py-2 w-[80vw] md:w-[30vw] rounded-md' id='bookimage' name='bookimage' type="text" placeholder='Book Image' required />
+              <input onChange={(e) => setBookprice(e.target.value)} value={bookprice} className='px-4 py-2 w-[80vw] md:w-[30vw] rounded-md' id='price' name='price' type="number" placeholder='Price' required />
 
 
 
@@ -331,13 +331,13 @@ const Dashboard = () => {
           :
           <section className='flex flex-col gap-4 justify-center items-center'>
             <h1 className='text-5xl font-medium mt-5 text-center'>Dashboard</h1>
-            <button onClick={() => handleClick()} className='text-white bg-blue-700 px-4 py-2 rounded-lg font-medium text-lg absolute top-24 right-5'>Refresh Page</button>
+            <button onClick={() => handleClick()} className='text-white bg-blue-700 px-4 py-2 rounded-lg font-medium text-lg absolute md:top-24 top-4 right-2 md:right-6'>Refresh Page</button>
 
-            <p className='text-center font-medium text-lg'>Welcome to the dashboard. Here you can manage your books, borrow books and return books.</p>
+            <p className='text-center font-medium text-lg mx-4 md:mx-0'>Welcome to the dashboard. Here you can manage your books, borrow books and return books.</p>
             <div className="cards flex justify-center items-center flex-wrap mx-4 gap-6 my-7">
               {booksArray.length === 0 && <p className='text-center font-medium text-lg'>No books available</p>}
               {booksArray.length > 0 && booksArray.map((book, index) => {
-                return <div className="card flex items-center justify-center" key={index}>
+                return <div className="card flex justify-center items-center" key={index}>
                   <div className="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden">
                     <img
                       src={book.bookimage}

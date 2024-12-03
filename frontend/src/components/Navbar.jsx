@@ -7,7 +7,7 @@ const Navbar = () => {
 
     const navigate = useNavigate();
     const logoutref = useRef();
-
+    const hamburgerRef = useRef();
 
     const handleLogOut = () => {
         logoutref.current.innerHTML = '<span class="loader"></span>';
@@ -19,14 +19,32 @@ const Navbar = () => {
         }, 1000);
     }
 
+    const handleHamburger = () => {
+        if(hamburgerRef.current.classList.contains('hidden')){
+            hamburgerRef.current.classList.remove('hidden');
+            hamburgerRef.current.classList.add('flex');
+            hamburgerRef.current.classList.add('flex-col');
+            hamburgerRef.current.classList.add('justify-center');
+            hamburgerRef.current.classList.add('items-center');
+        }
+        else{
+            hamburgerRef.current.classList.add('hidden');
+            hamburgerRef.current.classList.remove('flex');
+            hamburgerRef.current.classList.remove('flex-col');
+            hamburgerRef.current.classList.add('justify-center');
+            hamburgerRef.current.classList.add('items-center');
+        }
+    }
+
     return (
-        <nav className='flex justify-between items-center'>
+        <nav className='flex flex-col md:flex-row justify-between items-center py-4 md:py-0'>
             <Link to={"/"}>
             <div className="logo mx-4">
                 <h1 className='text-4xl font-bold'>BitLib</h1>
             </div>
             </Link>
-            <ul className='flex justify-end items-center gap-8 mx-4 p-4'>
+            <img onClick={()=>handleHamburger()} src="/hamburger.png" height={30} width={30} className='absolute left-2 top-4 md:hidden'  alt="" />
+            <ul ref={hamburgerRef} className='md:flex md:justify-end md:items-center gap-8 mx-4 p-4 md:flex-row hidden'>
                 <Link to={"/"} className='cursor-pointer transition-all text-lg font-medium'>Home</Link>
                 <Link to={"/dashboard"} className='cursor-pointer transition-all text-lg font-medium'>Dashboard</Link>
                 <Link to={"/"} className='cursor-pointer transition-all text-lg font-medium'>About</Link>

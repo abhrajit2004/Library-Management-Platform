@@ -123,12 +123,12 @@ const Login = () => {
                 pauseOnHover
                 theme="dark"
             />
-            <div className='bg-slate-200 min-h-[91vh] flex flex-col gap-5 justify-start items-center font-medium text-lg'>
+            <div className='bg-slate-200 md:min-h-[91vh] min-h-screen flex flex-col gap-5 justify-start items-center font-medium text-lg'>
                 {!isLogin ? <h1 className='text-5xl font-bold my-10'>Sign Up</h1> : <h1 className='text-5xl font-bold my-10'>Log In</h1>}
                 <form className='flex flex-col justify-center items-center gap-4'>
-                    {!isLogin && <input onChange={(e) => setName(e.target.value)} value={name} className='px-4 py-2 w-[30vw] rounded-md' id='name' name='name' type="text" placeholder='Name' required />}
-                    <input onChange={(e) => setEmail(e.target.value)} value={email} className='px-4 py-2 w-[30vw] rounded-md' id='email' name='email' type="email" placeholder='Email' required />
-                    <input onChange={(e) => setPassword(e.target.value)} value={password} className='px-4 py-2 w-[30vw] rounded-md' id='password' name='password' type="password" placeholder='Password' required />
+                    {!isLogin && <input onChange={(e) => setName(e.target.value)} value={name} className='px-4 py-2 w-[80vw] md:w-[30vw] rounded-md' id='name' name='name' type="text" placeholder='Name' required />}
+                    <input onChange={(e) => setEmail(e.target.value)} value={email} className='px-4 py-2 w-[80vw] md:w-[30vw] rounded-md' id='email' name='email' type="email" placeholder='Email' required />
+                    <input onChange={(e) => setPassword(e.target.value)} value={password} className='px-4 py-2 w-[80vw] md:w-[30vw] rounded-md' id='password' name='password' type="password" placeholder='Password' required />
 
                     <select value={role} onChange={(e) => setRole(e.target.value)} id="roles" className=" border border-gray-30 rounded-lg 0 block w-full p-2.5">
                         <option disabled>Choose Role</option>

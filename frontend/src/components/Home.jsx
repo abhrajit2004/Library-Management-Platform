@@ -47,10 +47,10 @@ const Home = () => {
   }, [])
 
   return (
-    <main className='bg-slate-300 min-h-[91vh]'>
-      <section className='flex justify-center items-center gap-10 flex-col p-36'>
-        <h1 className='text-5xl font-medium mx-10 text-center'>Welcome {name} on BitLib : A Library Management Platform</h1>
-        <p className='w-[40vw] text-center font-medium text-md'>As a user, you can borrow or return books and as an admin, you can add, update or delete books with a proper borrowing history system.</p>
+    <main className='bg-slate-300 min-h-screen md:min-h-[91vh]'>
+      <section className='flex justify-center items-center gap-10 flex-col md:p-36'>
+        <h1 className='md:text-5xl text-4xl font-medium md:mx-10 mt-32 md:mt-0 text-center'>Welcome {name} on BitLib : A Library Management Platform</h1>
+        <p className='md:w-[40vw] mx-10 md:mx-0 text-center font-medium text-xl md:text-md'>As a user, you can borrow or return books and as an admin, you can add, update or delete books with a proper borrowing history system.</p>
         <div className='buttons flex justify-center items-center gap-4'>
           <Link to={"/dashboard"}><button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-2 font-medium">Start Here</button></Link>
           <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-2 font-medium">Know more</button>

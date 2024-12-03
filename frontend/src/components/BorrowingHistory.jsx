@@ -33,11 +33,11 @@ const BorrowingHistory = () => {
 
 
     return (
-        <div className='min-h-[91vh] bg-slate-300 flex flex-col justify-start items-center py-4'>
+        <div className='md:min-h-[91vh] min-h-screen bg-slate-300 flex flex-col justify-start items-center py-4'>
 
             <button ref={ref} onClick={() => window.location.reload()} className='text-white bg-blue-700 px-4 py-2 rounded-xl font-medium text-lg'>Refresh Page</button>
 
-            <div className="cards flex flex-col justify-center items-center text-base font-medium py-4 gap-2">
+            <div className="cards flex flex-col justify-center items-center text-base font-medium py-4 gap-2 mx-6 md:mx-0">
                 {history.length > 0 && history.map((issue, index) => {
                     return <div className="card bg-white rounded-md px-4 py-4 max-w-xl" key={index}>
                         {issue.issuedTo} {issue.status} {issue.bookname} by {issue.bookauthor} on {issue.issuedDate.split('T')[0]}
