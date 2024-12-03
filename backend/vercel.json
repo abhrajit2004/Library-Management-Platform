@@ -1,5 +1,16 @@
 {
     "version": 2,
     "builds": [{ "src": "server.js", "use": "@vercel/node" }],
-    "routes": [{ "src": "/(.*)", "dest": "/server.js" }]
-}  
+    "routes": [
+      {
+        "src": "/(.*)",
+        "headers": {
+          "Access-Control-Allow-Origin": "https://bitlib.vercel.app",
+          "Access-Control-Allow-Methods": ["GET","HEAD","PATCH","POST","PUT","DELETE"],
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Credentials": "true"
+        },
+        "dest": "/server.js"
+      }
+    ]
+  }  
