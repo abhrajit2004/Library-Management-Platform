@@ -5,93 +5,109 @@ const Book = require('../models/Books')
 const User = require('../models/User')
 
 router.get('/getissueshistory', async (req, res) => {
-    const issues = await Issue.find({});
-    res.json({history: issues.reverse()});
+    try {
+        const issues = await Issue.find({});
+        res.json({ history: issues.reverse() });
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+
+    }
 });
 
 router.post('/issuebook/:id', async (req, res) => {
 
-    const id = req.params.id;
+    try {
+        const id = req.params.id;
 
-    const user = await User.findOne({ email: req.body.issuedTo });
+        const user = await User.findOne({ email: req.body.issuedTo });
 
-    if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-    }
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-    const book = await Book.findOne({ _id: id });
+        const book = await Book.findOne({ _id: id });
 
-    if (!book) {
-        return res.status(404).json({ message: 'Book not found' });
-    }
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
 
-    const existingIssue = await Issue.findOne({ bookId: id, status: 'issued', issuedTo: req.body.issuedTo });
+        const existingIssue = await Issue.findOne({ bookId: id, status: 'issued', issuedTo: req.body.issuedTo });
 
-    if (existingIssue) {
-        return res.status(400).json({ success: false, message: `This book is already issued to ${req.body.issuedTo}`, existingIssue });
-    }
+        if (existingIssue) {
+            return res.status(400).json({ success: false, message: `This book is already issued to ${req.body.issuedTo}`, existingIssue });
+        }
 
-    let returnedIssue = await Issue.findOne({ bookId: id, status: 'returned', issuedTo: req.body.issuedTo });
+        let returnedIssue = await Issue.findOne({ bookId: id, status: 'returned', issuedTo: req.body.issuedTo });
 
-    if (returnedIssue) {
-        await Issue.deleteOne({ _id: returnedIssue._id });
-    }
+        if (returnedIssue) {
+            await Issue.deleteOne({ _id: returnedIssue._id });
+        }
 
-    const issue = new Issue({
-        bookname: book.bookname,
-        bookauthor: book.bookauthor,
-        bookId: book._id,
-        status: 'issued',
-        issuedTo: req.body.issuedTo
-    });
+        const issue = new Issue({
+            bookname: book.bookname,
+            bookauthor: book.bookauthor,
+            bookId: book._id,
+            status: 'issued',
+            issuedTo: req.body.issuedTo
+        });
 
-    const newIssue = await issue.save();
+        const newIssue = await issue.save();
 
-    if (newIssue) {
-        return res.status(200).json({ success: true, message: `Book issued successfully to ${req.body.issuedTo}`, newIssue });
+        if (newIssue) {
+            return res.status(200).json({ success: true, message: `Book issued successfully to ${req.body.issuedTo}`, newIssue });
+        }
+
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+
     }
 })
 
 router.post('/returnbook/:id', async (req, res) => {
 
-    const id = req.params.id;
+    try {
+        const id = req.params.id;
 
-    const user = await User.findOne({ email: req.body.issuedTo });
+        const user = await User.findOne({ email: req.body.issuedTo });
 
-    if (!user) {
-        return res.status(404).json({ message: 'User not found!' });
-    }
+        if (!user) {
+            return res.status(404).json({ message: 'User not found!' });
+        }
 
-    const book = await Book.findOne({ _id: id });
+        const book = await Book.findOne({ _id: id });
 
-    if (!book) {
-        return res.status(404).json({ message: 'Book not found!' });
-    }
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found!' });
+        }
 
-    let existingIssue = await Issue.findOne({ bookId: id, status: 'returned', issuedTo: req.body.issuedTo });
+        let existingIssue = await Issue.findOne({ bookId: id, status: 'returned', issuedTo: req.body.issuedTo });
 
-    if (existingIssue) {
-        return res.status(400).json({ success: false, message: `This book is already returned by ${req.body.issuedTo}`, existingIssue });
-    }
+        if (existingIssue) {
+            return res.status(400).json({ success: false, message: `This book is already returned by ${req.body.issuedTo}`, existingIssue });
+        }
 
-    let borrowedIssue = await Issue.findOne({ bookId: id, status: 'issued', issuedTo: req.body.issuedTo });
+        let borrowedIssue = await Issue.findOne({ bookId: id, status: 'issued', issuedTo: req.body.issuedTo });
 
-    if (borrowedIssue) {
-        await Issue.deleteOne({ _id: borrowedIssue._id });
-    }
-    
-    const issue = new Issue({
-        bookname: book.bookname,
-        bookauthor: book.bookauthor,
-        bookId: book._id,
-        status: 'returned',
-        issuedTo: req.body.issuedTo
-    });
+        if (borrowedIssue) {
+            await Issue.deleteOne({ _id: borrowedIssue._id });
+        }
 
-    const newIssue = await issue.save();
+        const issue = new Issue({
+            bookname: book.bookname,
+            bookauthor: book.bookauthor,
+            bookId: book._id,
+            status: 'returned',
+            issuedTo: req.body.issuedTo
+        });
 
-    if (newIssue) {
-        return res.status(200).json({ success: true, message: `Book returned successfully by ${req.body.issuedTo}`, newIssue });
+        const newIssue = await issue.save();
+
+        if (newIssue) {
+            return res.status(200).json({ success: true, message: `Book returned successfully by ${req.body.issuedTo}`, newIssue });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+
     }
 
 })
