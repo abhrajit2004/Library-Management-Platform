@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Modal from './Modal'
+import SearchBar from './SearchBar'
 
 const Dashboard = () => {
 
@@ -45,7 +46,7 @@ const Dashboard = () => {
       "bookauthor": bookauthor,
       "bookprice": bookprice,
       "bookgenre": bookgenre,
-      "bookimage" : bookimage,
+      "bookimage": bookimage,
       "role": localStorage.getItem('role')
     });
 
@@ -144,6 +145,63 @@ const Dashboard = () => {
       [field]: e.target.value,
     }));
   };
+
+  const borrowBook = (id) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "issuedTo": localStorage.getItem('email')
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch(`http://localhost:3000/api/v1/issues/issuebook/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if(result.success){
+          alert(result.message)
+        }
+        else{
+          alert(result.message)
+        }
+      })
+      .catch((error) => console.error(error));
+  }
+
+  const returnBook = (id) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "issuedTo": localStorage.getItem('email'),
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch(`http://localhost:3000/api/v1/issues/returnbook/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          alert(result.message)
+        }
+        else{
+          alert(result.message)
+        }
+      })
+      .catch((error) => console.error(error));
+  }
+
 
 
   useEffect(() => {
@@ -248,33 +306,37 @@ const Dashboard = () => {
         <section className='flex flex-col gap-4 justify-center items-center'>
           <h1 className='text-5xl font-medium mt-5 text-center'>Dashboard</h1>
           <p className='text-center font-medium text-lg'>Welcome to the dashboard. Here you can manage your books, borrow books and return books.</p>
-
+          <SearchBar/>
           <div className="cards flex justify-center items-center flex-wrap mx-4 gap-6 my-7">
             {booksArray.length > 0 && booksArray.map((book, index) => {
-              return   <div className="card flex items-center justify-center" key={index}>
-              <div className="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden">
-                <img
-                  src={book.bookimage}
-                  alt="Card Image"
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h2 className="text-xl font-bold text-gray-800">{book.bookname}</h2>
-                  <p className="text-gray-600 mt-2">
-                   {book.bookauthor}
-                  </p>
-                  <div className="mt-4">
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                      Borrow
-                    </button>
+              return <div className="card flex items-center justify-center" key={index}>
+                <div className="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden">
+                  <img
+                    src={book.bookimage}
+                    alt="Card Image"
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <h2 className="text-xl font-bold text-gray-800">{book.bookname}</h2>
+                    <p className="text-gray-600 mt-2">
+                      {book.bookauthor}
+                    </p>
+                    <div className="mt-4 flex gap-4">
+                     <button onClick={() => borrowBook(book._id)} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                        Borrow
+                      </button> 
+                        <button onClick={()=> returnBook(book._id)} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                          Return
+                        </button>
+                      
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             })
             }
-          
-           
+
+
           </div>
         </section>
       }

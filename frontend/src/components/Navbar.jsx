@@ -30,6 +30,7 @@ const Navbar = () => {
                 <Link to={"/"} className='cursor-pointer transition-all text-lg font-medium'>Home</Link>
                 <Link to={"/dashboard"} className='cursor-pointer transition-all text-lg font-medium'>Dashboard</Link>
                 <Link to={"/"} className='cursor-pointer transition-all text-lg font-medium'>About</Link>
+                {localStorage.getItem('role') === 'admin' && <Link to={"/borrowinghistory"} className='cursor-pointer transition-all text-lg font-medium'>Borrowing History</Link>}
                 <Link to={"/"} className='cursor-pointer transition-all text-lg font-medium'>Contact</Link>
                 <li>
                     { !localStorage.getItem('auth-token') ? <button  type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg text-center px-4 py-2">Login / Signup</button> :

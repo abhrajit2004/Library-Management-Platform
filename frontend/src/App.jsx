@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import BorrowingHistory from './components/BorrowingHistory'
 
 function App() {
 
@@ -21,6 +22,10 @@ function App() {
     {
       path: "/login",
       element: <><Navbar /><Login /></>
+    },
+    {
+      path: "/borrowinghistory",
+      element: <><Navbar /><BorrowingHistory /></>
     }
   ]
   )

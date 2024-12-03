@@ -61,9 +61,9 @@ router.post('/searchbooks', async (req, res) => {
 
     const searchItem = req.body;
 
-    const book = await Book.findOne({bookname: searchItem.bookname, bookauthor: searchItem.bookauthor});
+    const book = await Book.findOne({bookname: searchItem.bookname});
 
-    if(book.length === 0){
+    if(!book){
         return res.status(404).send({message: "Book Not Found"});
     }
 
