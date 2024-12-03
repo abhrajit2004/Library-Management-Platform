@@ -12,7 +12,7 @@ const BorrowingHistory = () => {
             redirect: "follow"
         };
 
-        fetch("http://localhost:3000/api/v1/issues/getissueshistory", requestOptions)
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/issues/getissueshistory`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 ref.current.innerHTML = '<span class="loader"></span>';

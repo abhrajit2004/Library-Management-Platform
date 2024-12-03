@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
+
 const Home = () => {
 
   const navigate = useNavigate()
@@ -27,7 +28,7 @@ const Home = () => {
       redirect: "follow"
     };
 
-    fetch("http://localhost:3000/api/v1/auth/getuser", requestOptions)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/getuser`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setName(result.user.name)
@@ -47,10 +48,9 @@ const Home = () => {
 
   return (
     <main className='bg-slate-300 min-h-[91vh]'>
-      <section className='flex justify-center items-center gap-10 flex-col'>
-        <h1 className='text-5xl font-medium mt-5'>Hello {name}( {role} )</h1>
-        <h1 className='text-4xl font-medium'>Welcome to BitLib</h1>
-        <p className='w-[40vw] text-center font-medium text-md'>Your library to borrow books or add books ( if you're an admin ). It is secure, fast and easy to do operations.</p>
+      <section className='flex justify-center items-center gap-10 flex-col p-36'>
+        <h1 className='text-5xl font-medium mx-10 text-center'>Welcome {name} on BitLib : A Library Management Platform</h1>
+        <p className='w-[40vw] text-center font-medium text-md'>As a user, you can borrow or return books and as an admin, you can add, update or delete books with a proper borrowing history system.</p>
         <div className='buttons flex justify-center items-center gap-4'>
           <Link to={"/dashboard"}><button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-2 font-medium">Start Here</button></Link>
           <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-2 font-medium">Know more</button>
