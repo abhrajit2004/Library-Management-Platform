@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/v1/(.*)",
+        "destination": "https://bitlibbackend.vercel.app/api/v1/$1"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ]
+  }
