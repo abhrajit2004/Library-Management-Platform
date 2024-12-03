@@ -11,8 +11,8 @@ app.use(bodyParser.json())
 
 app.use(cors({
     origin: 'https://bitlib.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Access-Control-Allow-Origin','Content-Type', 'Authorization', 'auth-token'],
+    methods: ['GET', 'HEAD', 'PATCH', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
 }))
 
 connectdb();
