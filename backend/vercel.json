@@ -7,7 +7,8 @@
         "headers": {
           "Access-Control-Allow-Methods": "GET,HEAD,PATCH,POST,PUT,DELETE",
           "Access-Control-Allow-Headers": "*",
-          "Access-Control-Allow-Credentials": "true"
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Origin": "*"
         },
         "dest": "/server.js"
       }
